@@ -8,10 +8,10 @@ then adding a linear velocity dependent damping term (F = -bv) to make sure the 
 
 The program named atomic attempts to allow for more spread out stable distributions.
 The forces are inspired by the behavior of protons and neutrons inside an atom, hence the name.
-This is simulated using combination of s longdistance acting attractive coulomb force (prop to 1/r^2) 
+This is simulated using combination of a long distance acting attractive coulomb force (prop to 1/r^2) 
 and a repulsive strong force which dies off quickly (prop to 1/r^5) along with damping. 
 Further work is needed since the system tends to prefer either oscillating 
-right off the frame or getting damped before reaching a good looking final state.
+right out of the frame or getting damped before reaching a good looking final state.
 
 Alt includes a section which converts the frames into a watchable video using imageio.
 
