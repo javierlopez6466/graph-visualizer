@@ -1,11 +1,12 @@
 import math
 from PIL import Image, ImageDraw, ImageFont
 import random
+import imageio
 import time
 start_time = time.time()
 
-width = 1000
-height = 1000
+width = 1008
+height = 1008
 
 img=Image.new('RGB',(width,height),'white') 
 draw=ImageDraw.Draw(img)
@@ -79,7 +80,7 @@ nodes = [p_1,p_2,p_3,p_4,p_5]
 '''
 
 nodes = []
-for n in range(1,3+1):
+for n in range(1,4+1):
     x0 = random.randrange(200,800)
     y0 = random.randrange(200,800)
     nodes.append(Node(n,Vec2D(x0,y0),Vec2D(0,0),Vec2D(0,0)))
@@ -116,8 +117,10 @@ def print_point(p,color):
 #TIME EVOLUTION
 divisions = 30 #dt represents 1 divisionth of a second
 dt = 1/divisions
-runtime = 400 #number of seconds to simulate
+runtime = 300 #number of seconds to simulate
 img.show()
+
+image_bookshelf = []
 
 for t in range(0,divisions*runtime):
     for node in nodes:
@@ -141,8 +144,12 @@ for t in range(0,divisions*runtime):
         if node.number == 2 and t%10 == 0:
             p_2_history.append((t,p_2.position.x))
         '''
-    if t%(divisions*100) == 0:
-        img.show()
+        
+    if t%(divisions) == 0:
+        #img.show()
+        name = "/Users/javierlopez/Documents/Oscillatory1/image"+str(t)+".png"
+        image_bookshelf.append(name)
+        img.save(name,'PNG')
 
 #img.show()
 
@@ -167,6 +174,13 @@ for history in [p_1_history,p_2_history]:
         draw.ellipse((x-r/2, y-r/2, x+r/2, y+r/2), fill = color, outline = color)
 img2.show()
 '''
+
+writer = imageio.get_writer('/Users/javierlopez/Documents/Outputs/RaspberryPudding5.mp4', fps=20)
+
+for im in image_bookshelf:
+    writer.append_data(imageio.imread(im))
+writer.close()
+
 
 print ("The program took", time.time() - start_time, "seconds to run")
 
