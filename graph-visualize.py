@@ -130,7 +130,7 @@ class Graph:
         # update velocity, position
         for i,force in enumerate(forces):
             self.velocities[i] += force * dx
-            pos = self.positions[j] + self.velocities[i] * dx
+            pos = self.positions[i] + self.velocities[i] * dx
             self.update_pos(i,pos)
 
     def print_nodes(self):
